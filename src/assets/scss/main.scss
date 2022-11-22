@@ -2,3 +2,32 @@
 @import './typography';
 @import './variable';
 @import './mixins';
+
+
+.ql-toolbar {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    width: 100%;
+    // SHOULD BE STICKY WHEN SCROLLING
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
+  }
+  
+  .ql-container {
+    width: 100%;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    min-height: 10cm;
+    // A4 
+    max-height: 29.7cm;
+    background-color: white;
+
+  
+    .ql-editor {
+      min-height: 10cm;
+      max-height: 29.7cm;
+      font-size: 1.3rem;
+    }
+  }
