@@ -1,3 +1,21 @@
+@import "../../assets/scss/variable";
+
 .homeMainContainer {
-    background-color: red;
+    position: relative;
+    display: flex;
+}
+
+.homeLeftMainContainer {
+    width: 20%;
+    max-width: 30rem;
+    background-color: $light-bgcolor;
+    height: 100vh;
+    position: fixed;
+    border-radius: 1rem;
+}
+
+.homeRightMainContainer {
+    width: 80%;
+    flex: 1;
+    margin-left: 30rem;
 }
