@@ -1,4 +1,36 @@
+@import "../../assets/scss/variable";
+
 .topBarMainContainer {
     width: 100%;
-    background-color: red;
+    display: flex;
+    .rightContainer {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $light-bgcolor;
+        padding: 2rem;
+        border-radius: 1rem;
+        .folder {
+            display: flex;
+            .folderIcon {
+                margin-right: 1rem;
+            }
+            .folderText {
+                color: $primary-text-color;
+                font-size: 1.6rem;
+            }
+        }
+    }
+    .leftContainer {
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: $light-bgcolor;
+        margin-left: 3rem;
+        padding: 2rem;
+        border-radius: 1rem;
+
+    }
 }

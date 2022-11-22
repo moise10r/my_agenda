@@ -1,13 +1,10 @@
 import React from 'react';
-import Button from '@mui/material/Button';
-import styles from './BaseButton.module.scss';
+import styles from './BaseBtn.module.scss';
 interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   name?: string;
   disabled?: boolean;
   children?: React.ReactNode;
-  color?: 'primary' | 'secondary';
-  variant?: 'contained' | 'outlined' | 'text';
 }
 
 const BaseButton = ({
@@ -15,19 +12,15 @@ const BaseButton = ({
   name,
   disabled,
   children,
-  color,
-  variant,
 }: ButtonProps) => {
   return (
-    <Button
+    <button
       className={styles.BaseButton}
       onClick={onClick}
       disabled={disabled}
-      color={color || 'primary'}
-      variant={variant || 'contained'}
     >
       {children || name}
-    </Button>
+    </button>
   );
 };
 

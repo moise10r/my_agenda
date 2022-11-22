@@ -1,0 +1,15 @@
+@import '../../../assets/scss/variable';
+
+.BaseButton {
+    padding: 1rem 2.5rem !important;
+    text-transform: capitalize !important;
+    font-size: 1.4rem !important;
+    color: $primary-text-color;
+    border-radius: 1rem;
+    font-weight: 600;
+    box-shadow: none;
+
+    &:hover {
+        box-shadow: none;
+    }
+}
