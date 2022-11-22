@@ -1,0 +1,91 @@
+@import '../../assets/scss/variable';
+$gl-xs: "screen and (max-width: 35.5em)"; // up to 568px
+
+.table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  margin-bottom: 3rem;
+
+  * {
+    position: relative;
+  }
+
+  .tableColumn {
+    color: $secondary-color;
+  }
+
+  .tableHead .tableRwo {
+    height: 4rem;
+    background: $darkbleu-bgcolor;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  .tableBody .tableRow {
+    height: 48px;
+    border-bottom: 1px solid lighten($primary-text-color, 70);
+    &:last-child {
+      border: 0;
+    }
+  }
+
+  .tableData {
+    color: $primary-text-color;
+    text-align: center;
+  }
+}
+
+@media #{$gl-xs} {
+  .table {
+    display: block;
+    > *,
+    .tableRow,
+    .tableData,
+    .tableColumn {
+      display: block;
+    }
+
+    .tableHead {
+      display: none;
+    }
+    .tableBody .tableRow {
+      height: auto;
+      padding: 8px 0;
+      .tableData {
+        padding-left: 45%;
+        margin-bottom: 12px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &:before {
+          position: absolute;
+          font-weight: 700;
+          width: 40%;
+          left: 10px;
+          top: 0;
+        }
+
+        &:nth-child(1):before {
+          content: "Code";
+        }
+        &:nth-child(2):before {
+          content: "Stock";
+        }
+        &:nth-child(3):before {
+          content: "Cap";
+        }
+        &:nth-child(4):before {
+          content: "Inch";
+        }
+        &:nth-child(5):before {
+          content: "Box Type";
+        }
+      }
+    }
+  }
+}
