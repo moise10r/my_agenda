@@ -1,0 +1,24 @@
+@import '../../../assets/scss/variable';
+@import '../../../assets/scss/mixins';
+
+.modalWrapperMain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.ModalWrapper {
+    width: 60%;
+    max-height: 90%;
+    overflow-y: auto;
+
+    @include media($screen-md) {
+        width: 80%;
+
+    }
+
+    @include media($screen-sm) {
+        width: 95%;
+    }
+}

@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
-export class Agenda {
+export class Note {
     id: string;
     title: string;
     permissions: string;
     description: string;
     createdAt: string;
-    constructor(title: string, permissions: string, description: string, createdAt: string) {
+    constructor(title: string, permissions: string, description: string) {
         this.id = uuidv4();
         this.title = title;
         this.permissions = permissions;
@@ -14,4 +14,4 @@ export class Agenda {
     }
 }
 // export the agenda class
-export default Agenda;
+export default Note;

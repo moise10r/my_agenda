@@ -1,10 +1,17 @@
 import React from 'react'
 import styles from './table.module.scss';
-import agendaList from '../../utils/agendaList';
 
+//implement the interface for the agenda
+interface Agenda {
+  id: string;
+  title: string;
+  permissions: string;
+  description: string;
+  createdAt: string;
+}
 
-
-export default function Table() {
+export default function Table(props: any) {
+  const {agenda, onDelete} = props;
   return (
     <table className={styles.table}>
       <thead className={styles.tableHead}>
@@ -17,7 +24,7 @@ export default function Table() {
       </thead>
       <tbody className={styles.tableBody}>
         {
-            agendaList.map((note)=>(
+            agenda.map((note:Agenda)=>(
                 <tr className={styles.tableRow} key={note.id}>
                 <td className={styles.tableData}>
                     <div className={styles.title}>
@@ -30,7 +37,7 @@ export default function Table() {
                 <td className={styles.tableData}>
                   <div className={styles.controlBtns}>
                       <button className={styles.editBtn}>Edit</button>
-                      <button className={styles.deleteBtn}>Delete</button>
+                      <button className={styles.deleteBtn} onClick={() => onDelete(note.id)}>Delete</button>
                   </div>
                 </td>
               </tr>
