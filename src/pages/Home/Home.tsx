@@ -9,27 +9,27 @@ import Note from "../../utils/note";
 import agendaList from "../../utils/agendaList";
 import ModalWrapper from "../../components/modal/ModalWrapper/modalWrapper";
 import ConfirmModal from "../../components/modal/confirmModal/confirmModal";
+import { truncateStr } from "../../utils/truncateStr";
+import EditorNoteModal from "../../components/modal/EditNoteModal/editorNoteModal";
 
 export default function Home() {
   const [description, setDescription] = React.useState("");
-  const [title, setTitle] = React.useState("");
   const handleChange = (content: any) => {
     const newContent = `${content}`;
-    const titleContent = newContent.slice(
-      newContent.indexOf("<p>") + 3,
-      newContent.indexOf("</p>")
-    );
-    setDescription(content);
-    setTitle(titleContent);
+    setDescription(newContent);
   };
 
   const [agenda, setAgenda] = React.useState<any>([]);
 
   const [isModalOpen, setIsModalOPen] = React.useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
   const [selectedNoteId, setSelectedNoteId] = React.useState<any>(null);
 
   const handleCloseModal = () => {
     setIsModalOPen(false);
+    setIsDeleteModalOpen(false);
+    setIsEditModalOpen(false);
   };
 
   useEffect(() => {
@@ -38,22 +38,41 @@ export default function Home() {
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log("submit");
+    const title = description.slice(
+      description.indexOf("<p>") + 3,
+      description.indexOf("</p>")
+    );
+    const htmlRegexG = /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g;
+    const truncatedTitle = truncateStr(title, 10);
+    const truncatedDescriptionContent = truncateStr(
+      description.replace(htmlRegexG, ""),
+      20
+    );
     const permission = "public";
-    const newAgenda = new Note(title, permission, description);
+    const newAgenda = new Note(truncatedTitle, permission, description);
+    newAgenda.shortDescription = truncatedDescriptionContent;
     setAgenda([...agenda, newAgenda]);
+    setDescription("");
   };
   const handleDelete = (id: string) => {
     console.log(id);
     setSelectedNoteId(id);
     setIsModalOPen(true);
+    setIsDeleteModalOpen(true);
   };
 
+  const handleEdit = (id: string) => {
+    console.log(id);
+    setSelectedNoteId(id);
+    setIsModalOPen(true);
+    setIsEditModalOpen(true);
+  };
   const handleConfirm = () => {
     console.log("confirm", selectedNoteId);
     const newAgenda = agenda.filter((note: Note) => note.id !== selectedNoteId);
     setAgenda(newAgenda);
     setIsModalOPen(false);
+    setSelectedNoteId(null);
   };
   return (
     <div className={styles.homeMainContainer}>
@@ -81,6 +100,7 @@ export default function Home() {
             agenda={agenda}
             onOpen={handleDelete}
             onDelete={handleDelete}
+            onEdit={handleEdit}
           />
         </div>
         {isModalOpen && (
@@ -88,10 +108,18 @@ export default function Home() {
             <div className={styles.modalBg}></div>
             <div className={styles.modalContentWrapper}>
               <ModalWrapper open={isModalOpen} onClose={handleCloseModal}>
-                <ConfirmModal
-                  onClose={handleCloseModal}
-                  onConfirm={handleConfirm}
-                />
+                {isDeleteModalOpen && (
+                  <ConfirmModal
+                    onClose={handleCloseModal}
+                    onConfirm={handleConfirm}
+                  />
+                )}
+                {isEditModalOpen && (
+                  <EditorNoteModal
+                    onClose={handleCloseModal}
+                    onEdit={handleEdit}
+                  />
+                )}
               </ModalWrapper>
             </div>
           </div>

@@ -1,18 +1,19 @@
-import 'quill/dist/quill.snow.css';
-import styles from './index.module.scss';
-import { useCallback, useEffect, useState } from 'react';
-const Quill = typeof window === 'object' ? require('quill') : () => false;
+import "quill/dist/quill.snow.css";
+import React from "react";
+import styles from "./index.module.scss";
+import { useCallback, useEffect, useState } from "react";
+const Quill = typeof window === "object" ? require("quill") : () => false;
 
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
   [{ font: [] }],
-  [{ list: 'ordered' }, { list: 'bullet' }],
-  ['bold', 'italic', 'underline'],
+  [{ list: "ordered" }, { list: "bullet" }],
+  ["bold", "italic", "underline"],
   [{ color: [] }, { background: [] }],
-  [{ script: 'sub' }, { script: 'super' }],
+  [{ script: "sub" }, { script: "super" }],
   [{ align: [] }],
-  ['image', 'blockquote', 'code-block'],
-  ['clean'],
+  ["image", "blockquote", "code-block"],
+  ["clean"],
 ];
 
 interface EditorProps {
@@ -28,17 +29,14 @@ const Editor = (props: EditorProps) => {
     if (quill == null) return;
 
     const handler = (delta: any, oldDelta: any, source: any) => {
-      console.log('delta', delta, oldDelta, source);
-      
-      if (source !== 'user') return;
-      
+      if (source !== "user") return;
       onChange?.(quill.root.innerHTML);
     };
 
-    quill.on('text-change', handler);
+    quill.on("text-change", handler);
 
     return () => {
-      quill.off('text-change', handler);
+      quill.off("text-change", handler);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quill]);
@@ -46,14 +44,14 @@ const Editor = (props: EditorProps) => {
   const wrapperRef = useCallback((wrapper: any) => {
     if (wrapper == null) return;
 
-    wrapper.innerHTML = '';
-    const editor = document?.createElement('div');
+    wrapper.innerHTML = "";
+    const editor = document?.createElement("div");
     wrapper.append(editor);
 
     const q = new Quill(editor, {
-      theme: 'snow',
+      theme: "snow",
       modules: { toolbar: TOOLBAR_OPTIONS },
-      placeholder: 'Start writing...',
+      placeholder: "Start writing...",
     });
     setQuill(q);
   }, []);
@@ -61,7 +59,7 @@ const Editor = (props: EditorProps) => {
   useEffect(() => {
     if (quill == null) return;
     if (value !== quill.root.innerHTML) {
-      quill.root.innerHTML = value || '';
+      quill.root.innerHTML = value || "";
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quill, value]);

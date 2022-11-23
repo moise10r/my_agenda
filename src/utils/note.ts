@@ -3,6 +3,7 @@ export class Note {
     id: string;
     title: string;
     permissions: string;
+    shortDescription: string;
     description: string;
     createdAt: string;
     constructor(title: string, permissions: string, description: string) {
@@ -10,6 +11,7 @@ export class Note {
         this.title = title;
         this.permissions = permissions;
         this.description = description;
+        this.shortDescription = '';
         this.createdAt = new Date().toISOString();
     }
 }

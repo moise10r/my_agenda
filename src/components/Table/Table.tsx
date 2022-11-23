@@ -1,17 +1,18 @@
-import React from 'react'
-import styles from './table.module.scss';
+import React from "react";
+import styles from "./table.module.scss";
 
 //implement the interface for the agenda
 interface Agenda {
   id: string;
   title: string;
   permissions: string;
+  shortDescription: string;
   description: string;
   createdAt: string;
 }
 
 export default function Table(props: any) {
-  const {agenda, onDelete} = props;
+  const { agenda, onDelete, onEdit } = props;
   return (
     <table className={styles.table}>
       <thead className={styles.tableHead}>
@@ -23,28 +24,35 @@ export default function Table(props: any) {
         </tr>
       </thead>
       <tbody className={styles.tableBody}>
-        {
-            agenda.map((note:Agenda)=>(
-                <tr className={styles.tableRow} key={note.id}>
-                <td className={styles.tableData}>
-                    <div className={styles.title}>
-                        <span>{note.title}</span>
-                        <span>{note.description}</span>
-                    </div>    
-                </td>
-                <td className={styles.tableData}>{note.permissions}</td>
-                <td className={styles.tableData}>{note.createdAt}</td>
-                <td className={styles.tableData}>
-                  <div className={styles.controlBtns}>
-                      <button className={styles.editBtn}>Edit</button>
-                      <button className={styles.deleteBtn} onClick={() => onDelete(note.id)}>Delete</button>
-                  </div>
-                </td>
-              </tr>
-            ))
-        }
+        {agenda.map((note: Agenda) => (
+          <tr className={styles.tableRow} key={note.id}>
+            <td className={styles.tableData}>
+              <div className={styles.title}>
+                <span>{note.title}</span>
+                <span>{note.shortDescription}</span>
+              </div>
+            </td>
+            <td className={styles.tableData}>{note.permissions}</td>
+            <td className={styles.tableData}>{note.createdAt}</td>
+            <td className={styles.tableData}>
+              <div className={styles.controlBtns}>
+                <button
+                  className={styles.editBtn}
+                  onClick={() => onEdit(note.id)}
+                >
+                  Edit
+                </button>
+                <button
+                  className={styles.deleteBtn}
+                  onClick={() => onDelete(note.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
-      
-  )
+  );
 }
