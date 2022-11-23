@@ -28,7 +28,10 @@ const Editor = (props: EditorProps) => {
     if (quill == null) return;
 
     const handler = (delta: any, oldDelta: any, source: any) => {
+      console.log('delta', delta, oldDelta, source);
+      
       if (source !== 'user') return;
+      
       onChange?.(quill.root.innerHTML);
     };
 

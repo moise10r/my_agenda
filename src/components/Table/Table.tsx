@@ -1,5 +1,7 @@
 import React from 'react'
 import styles from './table.module.scss';
+import agendaList from '../../utils/agendaList';
+
 
 
 export default function Table() {
@@ -14,30 +16,26 @@ export default function Table() {
         </tr>
       </thead>
       <tbody className={styles.tableBody}>
-        <tr className={styles.tableRow}>
-          <td className={styles.tableData}>CES-9000</td>
-          <td className={styles.tableData}>50mt</td>
-          <td className={styles.tableData}>9mm</td>
-          <td className={styles.tableData}>1/2"</td>
-        </tr>
-           <tr className={styles.tableRow}>
-          <td className={styles.tableData}>CES-9000</td>
-          <td className={styles.tableData}>50mt</td>
-          <td className={styles.tableData}>9mm</td>
-          <td className={styles.tableData}>1/2"</td>
-        </tr>
-           <tr className={styles.tableRow}>
-          <td className={styles.tableData}>CES-9000</td>
-          <td className={styles.tableData}>50mt</td>
-          <td className={styles.tableData}>9mm</td>
-          <td className={styles.tableData}>1/2"</td>
-        </tr>
-           <tr className={styles.tableRow}>
-          <td className={styles.tableData}>CES-9000</td>
-          <td className={styles.tableData}>50mt</td>
-          <td className={styles.tableData}>9mm</td>
-          <td className={styles.tableData}>1/2"</td>
-        </tr>
+        {
+            agendaList.map((note)=>(
+                <tr className={styles.tableRow} key={note.id}>
+                <td className={styles.tableData}>
+                    <div className={styles.title}>
+                        <span>{note.title}</span>
+                        <span>{note.description}</span>
+                    </div>    
+                </td>
+                <td className={styles.tableData}>{note.permissions}</td>
+                <td className={styles.tableData}>{note.createdAt}</td>
+                <td className={styles.tableData}>
+                  <div className={styles.controlBtns}>
+                      <button className={styles.editBtn}>Edit</button>
+                      <button className={styles.deleteBtn}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))
+        }
       </tbody>
     </table>
       
