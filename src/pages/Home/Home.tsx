@@ -16,6 +16,8 @@ export default function Home() {
   const [description, setDescription] = React.useState("");
   const handleChange = (content: any) => {
     const newContent = `${content}`;
+    console.log(newContent);
+
     setDescription(newContent);
   };
 
@@ -61,11 +63,27 @@ export default function Home() {
     setIsDeleteModalOpen(true);
   };
 
-  const handleEdit = (id: string) => {
+  const handleEditModal = (id: string) => {
     console.log(id);
     setSelectedNoteId(id);
     setIsModalOPen(true);
     setIsEditModalOpen(true);
+    const note = agenda.find((note: any) => note.id === id);
+    setDescription(note.description);
+  };
+  const handleEdit = () => {
+    const newAgenda = agenda.map((note: any) => {
+      if (note.id === selectedNoteId) {
+        note.description = description;
+        return note;
+      }
+      return note;
+    });
+    console.log("new agenda", newAgenda);
+
+    setAgenda(newAgenda);
+    setIsModalOPen(false);
+    setIsEditModalOpen(false);
   };
   const handleConfirm = () => {
     console.log("confirm", selectedNoteId);
@@ -88,7 +106,7 @@ export default function Home() {
             <Editor onChange={handleChange} value={description} />
             <div className={styles.btnWrapper}>
               <BaseButton
-                name={"Submit"}
+                name={"Add Note"}
                 disabled={description === ""}
                 onClick={handleSubmit}
               />
@@ -100,7 +118,7 @@ export default function Home() {
             agenda={agenda}
             onOpen={handleDelete}
             onDelete={handleDelete}
-            onEdit={handleEdit}
+            onEdit={handleEditModal}
           />
         </div>
         {isModalOpen && (
@@ -118,6 +136,8 @@ export default function Home() {
                   <EditorNoteModal
                     onClose={handleCloseModal}
                     onEdit={handleEdit}
+                    onChange={handleChange}
+                    value={description}
                   />
                 )}
               </ModalWrapper>
