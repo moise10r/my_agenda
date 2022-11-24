@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./table.module.scss";
+import { truncateStr } from "../../utils/truncateStr";
 
 //implement the interface for the agenda
 interface Agenda {
@@ -28,8 +30,10 @@ export default function Table(props: any) {
           <tr className={styles.tableRow} key={note.id}>
             <td className={styles.tableData}>
               <div className={styles.title}>
-                <span>{note.title}</span>
-                <span>{note.shortDescription}</span>
+                <Link to={`/notes/${note.id}`} className={styles.title}>
+                  <span>{truncateStr(note.title, 10)}</span>
+                  <span>{note.shortDescription}</span>
+                </Link>
               </div>
             </td>
             <td className={styles.tableData}>{note.permissions}</td>

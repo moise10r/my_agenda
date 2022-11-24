@@ -52,13 +52,12 @@ export default function Home() {
       description.indexOf("</p>")
     );
     const htmlRegexG = /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g;
-    const truncatedTitle = truncateStr(title, 10);
     const truncatedDescriptionContent = truncateStr(
       description.replace(htmlRegexG, ""),
       20
     );
     const permission = "public";
-    const newAgenda = new Note(truncatedTitle, permission, description);
+    const newAgenda = new Note(title, permission, description);
     newAgenda.shortDescription = truncatedDescriptionContent;
     setAgenda([...agenda, newAgenda]);
     setDescription("");
@@ -91,8 +90,7 @@ export default function Home() {
           editDescription.indexOf("<p>") + 3,
           editDescription.indexOf("</p>")
         );
-        const truncatedTitle = truncateStr(title, 10);
-        note.title = truncatedTitle;
+        note.title = title;
         note.shortDescription = truncatedDescriptionContent;
         note.description = editDescription;
         return note;

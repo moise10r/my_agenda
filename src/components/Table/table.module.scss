@@ -1,4 +1,4 @@
-@import '../../assets/scss/variable';
+@import "../../assets/scss/variable";
 $gl-xs: "screen and (max-width: 35.5em)"; // up to 568px
 
 .table {
@@ -29,6 +29,11 @@ $gl-xs: "screen and (max-width: 35.5em)"; // up to 568px
   .tableBody .tableRow {
     height: 48px;
     border-bottom: 1px solid lighten($primary-text-color, 70);
+    .title {
+      text-align: center;
+      text-decoration: none;
+      color: $primary-text-color;
+    }
     &:last-child {
       border: 0;
     }
@@ -110,8 +115,8 @@ $gl-xs: "screen and (max-width: 35.5em)"; // up to 568px
     border-radius: 0.7rem;
     background-color: #f775ac;
     color: $white-color;
-    &:hover{
-    background-color: #f869a5;
+    &:hover {
+      background-color: #f869a5;
     }
   }
 }
