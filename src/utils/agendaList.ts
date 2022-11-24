@@ -10,7 +10,7 @@ const agendaList = [
     {
         id: '2',
         title: 'Agenda',
-        permissions: 'only you',
+        permissions: 'Public',
         description: 'What we will cover today',
         shortDescription: 'What we will cover today',
         createdAt: '2020-01-01T00:00:00.000Z'
@@ -18,7 +18,7 @@ const agendaList = [
     {
         id: '3',
         title: 'Demo',
-        permissions: 'only you',
+        permissions: 'Public',
         description: 'How to build a GraphQL API',
         shortDescription: 'How to build a GraphQL API',
         createdAt: '2020-01-01T00:00:00.000Z'
@@ -34,7 +34,7 @@ const agendaList = [
     {
         id: '5',
         title: 'Wrap up',
-        permissions: 'only you',
+        permissions: 'Public',
         description: 'Thank you for coming',
         shortDescription: 'Thank you for coming',
         createdAt: '2020-01-01T00:00:00.000Z'
