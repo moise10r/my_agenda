@@ -5,6 +5,7 @@ import profile from "../../assets/images/04.jpg";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
 import SummarizeIcon from "@mui/icons-material/Summarize";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const sideBarItems = [
   {
@@ -44,7 +45,9 @@ export default function sidebar() {
               </div>
               <div className={styles.userName}>Moise</div>
             </div>
-            <div>down</div>
+            <div className={styles.iconWrapper}>
+              <KeyboardArrowDownIcon className={styles.icon} />
+            </div>
           </div>
         </div>
 
