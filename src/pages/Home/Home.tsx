@@ -14,11 +14,18 @@ import EditorNoteModal from "../../components/modal/EditNoteModal/editorNoteModa
 
 export default function Home() {
   const [description, setDescription] = React.useState("");
+  const [editDescription, setEditDescription] = React.useState("");
+
   const handleChange = (content: any) => {
     const newContent = `${content}`;
     console.log(newContent);
 
-    setDescription(newContent);
+    if (isEditModalOpen) {
+      setDescription("");
+    } else {
+      setDescription(newContent);
+    }
+    setEditDescription(newContent);
   };
 
   const [agenda, setAgenda] = React.useState<any>([]);
@@ -69,12 +76,25 @@ export default function Home() {
     setIsModalOPen(true);
     setIsEditModalOpen(true);
     const note = agenda.find((note: any) => note.id === id);
-    setDescription(note.description);
+    setEditDescription(note.description);
   };
   const handleEdit = () => {
     const newAgenda = agenda.map((note: any) => {
       if (note.id === selectedNoteId) {
-        note.description = description;
+        const htmlRegexG = /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g;
+        const truncatedDescriptionContent = truncateStr(
+          editDescription.replace(htmlRegexG, ""),
+          20
+        );
+
+        const title = editDescription.slice(
+          editDescription.indexOf("<p>") + 3,
+          editDescription.indexOf("</p>")
+        );
+        const truncatedTitle = truncateStr(title, 10);
+        note.title = truncatedTitle;
+        note.shortDescription = truncatedDescriptionContent;
+        note.description = editDescription;
         return note;
       }
       return note;
@@ -137,7 +157,7 @@ export default function Home() {
                     onClose={handleCloseModal}
                     onEdit={handleEdit}
                     onChange={handleChange}
-                    value={description}
+                    value={editDescription}
                   />
                 )}
               </ModalWrapper>

@@ -2,7 +2,27 @@ import React from "react";
 import styles from "./sidebar.module.scss";
 import logo from "../../assets/images/logo.png";
 import profile from "../../assets/images/04.jpg";
+import EventNoteIcon from "@mui/icons-material/EventNote";
+import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
+import SummarizeIcon from "@mui/icons-material/Summarize";
 
+const sideBarItems = [
+  {
+    id: 1,
+    title: "Personal Notes",
+    icon: EventNoteIcon,
+  },
+  {
+    id: 2,
+    title: "Work Notes",
+    icon: SpeakerNotesIcon,
+  },
+  {
+    id: 3,
+    title: "Meeting Notes",
+    icon: SummarizeIcon,
+  },
+];
 export default function sidebar() {
   return (
     <div className={styles.mainSideBarContainer}>
@@ -29,20 +49,16 @@ export default function sidebar() {
         </div>
 
         <div className={styles.genreMainContainer}>
-            <ul className={styles.genreContainer}>
-                <li className={styles.genreItem}>
-                    <div className={styles.genreIcon}>0</div>
-                    <div className={styles.genreText}>Personal Notes</div>
-                </li>
-                <li className={styles.genreItem}>
-                    <div className={styles.genreIcon}>0</div>
-                    <div className={styles.genreText}>Work Notes</div>
-                </li>
-                <li className={styles.genreItem}>
-                    <div className={styles.genreIcon}>0</div>
-                    <div className={styles.genreText}>Musics Notes</div>
-                </li>
-            </ul>
+          <ul className={styles.genreContainer}>
+            {sideBarItems.map((item) => (
+              <li key={item.id} className={styles.genreItem}>
+                <div className={styles.genreIcon}>
+                  <item.icon className={styles.icon} />
+                </div>
+                <div className={styles.genreTitle}>{item.title}</div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
