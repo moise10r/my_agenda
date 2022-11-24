@@ -3,7 +3,14 @@ import styles from "./editorNoteModal.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import Editor from "../../common/Editor/index";
 
-const EditorNoteModal = (props: any) => {
+interface EditorNoteModalProps {
+  onClose: () => void;
+  onEdit: () => void;
+  onChange: (value: string) => void;
+  value: string;
+}
+
+const EditorNoteModal = (props: EditorNoteModalProps) => {
   const { onClose, onEdit, onChange, value } = props;
 
   return (

@@ -2,7 +2,12 @@ import React from "react";
 import styles from "./confirmModal.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 
-const ConfirmModal = (props: any) => {
+interface ConfirmModalProps {
+  onClose: () => void;
+  onConfirm: () => void;
+}
+
+const ConfirmModal = (props: ConfirmModalProps) => {
   const { onClose, onConfirm } = props;
   return (
     <div className={styles.confirmModalMainContainer}>
