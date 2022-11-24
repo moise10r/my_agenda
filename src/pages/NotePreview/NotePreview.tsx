@@ -3,20 +3,15 @@ import { useParams } from "react-router-dom";
 import agendaList from "../../utils/agendaList";
 import styles from "./NotePreview.module.scss";
 import parse from "html-react-parser";
+import { Note } from "../../modal/note";
 
-interface Note {
-  id: string;
-  title: string;
-  permissions: string;
-  shortDescription: string;
-  description: string;
-  createdAt: string;
-}
 const NotePreview = () => {
   const { noteId } = useParams<{ noteId: string }>();
   const [note, setNote] = React.useState<Note | null>(null);
 
   const getNote = () => {
+    console.log(noteId, agendaList);
+
     const selectedNote = agendaList.find((note: Note) => note.id === noteId);
     setNote(selectedNote || null);
     console.log(selectedNote);
