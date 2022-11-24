@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import agendaList from "../../utils/agendaList";
 import styles from "./NotePreview.module.scss";
 import parse from "html-react-parser";
 import { Note } from "../../modal/note";
+import storage from "../../utils/storage";
 
 const NotePreview = () => {
   const { noteId } = useParams<{ noteId: string }>();
   const [note, setNote] = React.useState<Note | null>(null);
 
   const getNote = () => {
-    console.log(noteId, agendaList);
+    const agenda = storage.get("agenda");
+    console.log(noteId, agenda);
 
-    const selectedNote = agendaList.find((note: Note) => note.id === noteId);
+    const selectedNote = agenda.find((note: Note) => note.id === noteId);
     setNote(selectedNote || null);
     console.log(selectedNote);
   };

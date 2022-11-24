@@ -11,6 +11,7 @@ import ModalWrapper from "../../components/modal/ModalWrapper/modalWrapper";
 import ConfirmModal from "../../components/modal/confirmModal/confirmModal";
 import { truncateStr } from "../../utils/truncateStr";
 import EditorNoteModal from "../../components/modal/EditNoteModal/editorNoteModal";
+import storage from "../../utils/storage";
 
 export default function Home() {
   const [description, setDescription] = React.useState("");
@@ -41,10 +42,6 @@ export default function Home() {
     setIsEditModalOpen(false);
   };
 
-  useEffect(() => {
-    setAgenda(agendaList);
-  }, []);
-
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const title = description.slice(
@@ -60,6 +57,7 @@ export default function Home() {
     const newAgenda = new Note(title, permission, description);
     newAgenda.shortDescription = truncatedDescriptionContent;
     setAgenda([...agenda, newAgenda]);
+    storage.set("agenda", [...agenda, newAgenda]);
     setDescription("");
   };
   const handleDelete = (id: string) => {
@@ -100,6 +98,7 @@ export default function Home() {
     console.log("new agenda", newAgenda);
 
     setAgenda(newAgenda);
+    storage.set("agenda", newAgenda);
     setIsModalOPen(false);
     setIsEditModalOpen(false);
   };
@@ -107,9 +106,22 @@ export default function Home() {
     console.log("confirm", selectedNoteId);
     const newAgenda = agenda.filter((note: Note) => note.id !== selectedNoteId);
     setAgenda(newAgenda);
+    storage.set("agenda", newAgenda);
     setIsModalOPen(false);
     setSelectedNoteId(null);
   };
+
+  useEffect(() => {
+    // check if there is any data in local storage
+    const agenda = storage.get("agenda");
+    if (agenda) {
+      setAgenda(agenda);
+    } else {
+      setAgenda(agendaList);
+      storage.set("agenda", agendaList);
+    }
+  }, []);
+
   return (
     <div className={styles.homeMainContainer}>
       <div className={styles.homeLeftMainContainer}>
