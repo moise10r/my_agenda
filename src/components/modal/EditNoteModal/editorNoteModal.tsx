@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./editorNoteModal.module.scss";
-import CloseIcon from "@mui/icons-material/Close";
 import Editor from "../../common/Editor/index";
 
 interface EditorNoteModalProps {
@@ -15,9 +14,6 @@ const EditorNoteModal = (props: EditorNoteModalProps) => {
 
   return (
     <div className={styles.editModalMainContainer}>
-      <button onClick={onClose} className={styles.closeModalBtn}>
-        <CloseIcon className={styles.closeIcon} />
-      </button>
       <div className={styles.editModalContainer}>
         <div className={styles.confirmModalHeader}>
           <Editor onChange={onChange} value={value} />

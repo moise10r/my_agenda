@@ -24,15 +24,6 @@
       text-align: center;
       margin-top: 3rem;
     }
-    .closeModalBtn {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 48%;
-      display: flex;
-    }
   }
   .editModalTitle {
     font-size: 1.6rem;
@@ -72,21 +63,6 @@
         background-color: #fff;
         color: #000;
       }
-    }
-  }
-  .closeModalBtn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 48%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &:hover {
-      background-color: #000;
-      color: #fff;
     }
   }
 }

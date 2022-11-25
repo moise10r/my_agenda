@@ -51,19 +51,4 @@
       }
     }
   }
-  .closeModalBtn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 48%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &:hover {
-      background-color: #000;
-      color: #fff;
-    }
-  }
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./confirmModal.module.scss";
-import CloseIcon from "@mui/icons-material/Close";
 
 interface ConfirmModalProps {
   onClose: () => void;
@@ -11,9 +10,6 @@ const ConfirmModal = (props: ConfirmModalProps) => {
   const { onClose, onConfirm } = props;
   return (
     <div className={styles.confirmModalMainContainer}>
-      <button onClick={onClose} className={styles.closeModalBtn}>
-        <CloseIcon className={styles.closeIcon} />
-      </button>
       <div className={styles.confirmModalContainer}>
         <div className={styles.confirmModalHeader}>
           <h3 className={styles.confirmModalTitle}>

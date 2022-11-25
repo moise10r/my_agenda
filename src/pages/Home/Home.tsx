@@ -5,6 +5,7 @@ import Topbar from "../../components/TopBar/topbar";
 import Editor from "../../components/common/Editor";
 import Table from "../../components/Table/Table";
 import BaseButton from "../../components/common/baseBtn/BaseBtn";
+import CloseIcon from "@mui/icons-material/Close";
 import Note from "../../utils/note";
 import agendaList from "../../utils/agendaList";
 import ModalWrapper from "../../components/modal/ModalWrapper/modalWrapper";
@@ -44,15 +45,14 @@ export default function Home() {
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const title = description.slice(
-      description.indexOf("<p>") + 3,
-      description.indexOf("</p>")
-    );
+
     const htmlRegexG = /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g;
     const truncatedDescriptionContent = truncateStr(
       description.replace(htmlRegexG, ""),
       20
     );
+    const title = editDescription.replace(htmlRegexG, "").slice(1, 20);
+
     const permission = "public";
     const newAgenda = new Note(title, permission, description);
     newAgenda.shortDescription = truncatedDescriptionContent;
@@ -65,6 +65,7 @@ export default function Home() {
     setSelectedNoteId(id);
     setIsModalOPen(true);
     setIsDeleteModalOpen(true);
+    setIsEditModalOpen(false);
   };
 
   const handleEditModal = (id: string) => {
@@ -72,6 +73,7 @@ export default function Home() {
     setSelectedNoteId(id);
     setIsModalOPen(true);
     setIsEditModalOpen(true);
+    setIsDeleteModalOpen(false);
     const note = agenda.find((note: any) => note.id === id);
     setEditDescription(note.description);
   };
@@ -81,13 +83,11 @@ export default function Home() {
         const htmlRegexG = /<(?:"[^"]*"['"]*|'[^']*'['"]*|[^'">])+>/g;
         const truncatedDescriptionContent = truncateStr(
           editDescription.replace(htmlRegexG, ""),
-          20
+          25
         );
 
-        const title = editDescription.slice(
-          editDescription.indexOf("<p>") + 3,
-          editDescription.indexOf("</p>")
-        );
+        const title = editDescription.replace(htmlRegexG, "").slice(1, 20);
+
         note.title = title;
         note.shortDescription = truncatedDescriptionContent;
         note.description = editDescription;
@@ -144,6 +144,10 @@ export default function Home() {
           </form>
         </div>
         <div className={styles.table}>
+          <div>
+            Total Notes
+            <strong className={styles.noteNumber}>{agenda.length}</strong>
+          </div>
           <Table
             agenda={agenda}
             onOpen={handleDelete}
@@ -155,13 +159,24 @@ export default function Home() {
           <div className={styles.modalContainer}>
             <div className={styles.modalBg}></div>
             <div className={styles.modalContentWrapper}>
-              <ModalWrapper open={isModalOpen} onClose={handleCloseModal}>
+              <ModalWrapper
+                open={isModalOpen}
+                className={styles.modalWrapper}
+                onClose={handleCloseModal}
+              >
+                <button
+                  onClick={handleCloseModal}
+                  className={styles.closeModalBtn}
+                >
+                  <CloseIcon className={styles.closeIcon} />
+                </button>
                 {isDeleteModalOpen && (
                   <ConfirmModal
                     onClose={handleCloseModal}
                     onConfirm={handleConfirm}
                   />
                 )}
+
                 {isEditModalOpen && (
                   <EditorNoteModal
                     onClose={handleCloseModal}
