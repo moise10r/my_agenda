@@ -1,5 +1,4 @@
-# Portfolio
-This is my portfolio, you can find in here all my best recent works. The website was designed in ReactJS.
+# MY AGENDA
 ## Built With
 
 - ReactJS
