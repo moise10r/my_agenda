@@ -2,6 +2,7 @@
 ## Built With
 
 - ReactJS
+- Typescript
 - SASS
 
 ## Getting Started
